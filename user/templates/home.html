@@ -62,11 +62,15 @@
     .section-title {
         text-align: center;
         margin: 50px 0 30px;
+
+   
     }
+   
 </style>
 
 <section class="hero">
     <div class="hero-content">
+        <img src="static/image/dressbackground">
         <h1>Elevate Your <span style="color: var(--primary);">Style</span></h1>
         <p>Discover our curated collection of premium cloth items, designed for the modern individual.</p>
         <a href="#shop" class="btn-primary" style="text-decoration: none;">Explore Collection</a>
@@ -101,9 +105,7 @@
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; margin-bottom: 15px;">
                     <span class="price">${{ item.price }}</span>
-                    <a href="#" style="text-decoration: none; color: #2f3542; font-weight: 600; border-bottom: 2px solid #ffa502; padding-bottom: 2px; font-size: 0.8rem;">
-                        Details
-                    </a>
+                  
                 </div>
 
                 <a href="{% url 'add_to_cart' item.id %}" class="btn-add-cart"
