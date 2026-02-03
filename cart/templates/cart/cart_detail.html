@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<style>
+    .cart-container { padding: 40px 8%; }
+    .cart-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .cart-table th { background: #2f3542; color: white; padding: 15px; text-align: left; }
+    .cart-table td { padding: 15px; border-bottom: 1px solid #eee; }
+    .cart-img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; }
+    .total-section { margin-top: 20px; text-align: right; font-size: 1.5rem; font-weight: bold; }
+    .btn-checkout { background: #2ed573; color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px; display: inline-block; margin-top: 10px; }
+</style>
+
+<div class="cart-container">
+    <h1>Your Shopping Cart</h1>
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        {% if item.product.image %}
+                        <img src="{{ item.product.image.url }}" class="cart-img">
+                        {% endif %}
+                        <strong>{{ item.product.name }}</strong>
+                    </div>
+                </td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.product.price }}</td>
+                <td>${{ item.total_price }}</td>
+                <td>
+                    <a href="{% url 'remove_from_cart' item.id %}" style="color: #ff4757;">Remove</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 50px;">Your cart is empty.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if cart_items %}
+    <div class="total-section">
+        Grand Total: ${{ total_price }}
+        <br>
+        <a href="#" class="btn-checkout">Proceed to Checkout</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

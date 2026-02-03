@@ -67,3 +67,14 @@ def category_update(request,pk):
     else:
         form=CategoryForm(instance=item)
     return render(request,'dress/category_form.html',{"form":form})
+
+
+
+@staff_member_required
+def category_delete(request, pk):
+    item = get_object_or_404(Category, pk=pk)
+    # Since you have a JS confirmation in your template, 
+    # clicking "OK" will trigger this view.
+    item.delete()
+    messages.warning(request, 'Category deleted successfully')
+    return redirect('category_list')

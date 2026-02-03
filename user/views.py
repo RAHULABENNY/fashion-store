@@ -2,11 +2,16 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from menu.models import Clothitems
 
 
 # Create your views here.
 def home(request):
-    return render(request,'home.html')
+    # Fetch only available items for the home page
+    items = Clothitems.objects.filter(is_avilable=True) 
+    
+    # You MUST pass the items in a dictionary as the third argument
+    return render(request, 'home.html', {'items': items})
 
 
 
