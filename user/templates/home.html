@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Elevate Your <span style="color: var(--primary);">Style</span></h1>
+        <p>Discover our curated collection of premium cloth items, designed for the modern individual.</p>
+        <a href="#shop" class="btn-primary" style="text-decoration: none;">Explore Collection</a>
+    </div>
+    <div class="hero-image hidden-mobile">
+        </div>
+</section>
+
+<div class="container" id="shop">
+    <div class="section-title">
+        <h2 style="font-size: 2.2rem; margin-bottom: 10px;">Featured Arrivals</h2>
+        <p style="color: #a4b0be;">Our latest pieces, handpicked for quality and comfort.</p>
+    </div>
+
+    <div class="product-grid">
+        {% for item in items %}
+        <div class="product-card">
+            <div class="product-img">
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
+                    <i class="fas fa-image" style="font-size: 3rem;"></i>
+                {% endif %}
+            </div>
+            <div class="product-info">
+                <span style="font-size: 0.75rem; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                    {{ item.category.name }}
+                </span>
+                <h3 style="margin-top: 5px;">{{ item.name }}</h3>
+                <p style="color: #a4b0be; font-size: 0.9rem; margin-bottom: 15px; height: 45px; overflow: hidden;">
+                    {{ item.description|truncatewords:10 }}
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="price">${{ item.price }}</span>
+                    <a href="#" style="text-decoration: none; color: var(--dark); font-weight: 600; border-bottom: 2px solid var(--primary); padding-bottom: 2px;">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div style="grid-column: 1 / -1; text-align: center; padding: 100px 0;">
+            <p style="color: #a4b0be; font-size: 1.2rem;">Our new collection is coming soon. Stay tuned!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+

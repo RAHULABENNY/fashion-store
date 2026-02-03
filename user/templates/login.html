@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    /* --- Modern Login Layout --- */
+    .login-container {
+        display: flex;
+        min-height: calc(100vh - 70px); /* Adjust based on your nav height */
+        background: var(--white);
+        overflow: hidden;
+    }
+
+    /* Left Side: Brand/Marketing Section */
+    .login-brand-side {
+        flex: 1.2;
+        background: linear-gradient(rgba(47, 53, 66, 0.8), rgba(47, 53, 66, 0.8)), 
+                    url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 60px;
+        color: white;
+    }
+
+    .brand-content h2 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        line-height: 1.1;
+    }
+
+    .brand-content p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        max-width: 450px;
+        margin-bottom: 40px;
+    }
+
+    /* Right Side: Form Section */
+    .login-form-side {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        background: #fcfcfc;
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .login-box h3 {
+        font-size: 2rem;
+        margin-bottom: 8px;
+        color: var(--text-dark);
+    }
+
+    .login-box .subtitle {
+        color: #747d8c;
+        margin-bottom: 30px;
+        display: block;
+    }
+
+    /* Social Logins */
+    .social-btns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
+    .social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: white;
+        cursor: pointer;
+        font-weight: 500;
+        transition: var(--transition);
+    }
+
+    .social-btn:hover {
+        background: #f1f2f6;
+        border-color: #ccc;
+    }
+
+    .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 25px 0;
+        color: #a4b0be;
+    }
+
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #eee;
+    }
+
+    .divider:not(:empty)::before { margin-right: 15px; }
+    .divider:not(:empty)::after { margin-left: 15px; }
+
+    /* Form Inputs */
+    .input-group {
+        margin-bottom: 20px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 14px;
+        border: 2px solid #edeff2;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: var(--transition);
+        outline: none;
+    }
+
+    .input-group input:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(255, 71, 87, 0.1);
+    }
+
+    .login-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        font-size: 0.9rem;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 15px;
+        background:  #e84118;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .submit-btn:hover {
+        background:  #e84118;
+        transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .login-brand-side { display: none; }
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-brand-side">
+        <div class="brand-content">
+            <h2>The Future of <br>Retail is Here.</h2>
+            <p>Join over 2 million members and get early access to limited edition drops and exclusive member-only pricing.</p>
+            
+            <div style="display: flex; gap: 20px;">
+                <div>
+                    <strong style="display: block; font-size: 1.5rem;">4.9/5</strong>
+                    <span style="font-size: 0.9rem; opacity: 0.7;">User Rating</span>
+                </div>
+                <div style="width: 1px; background: rgba(255,255,255,0.2);"></div>
+                <div>
+                    <strong style="display: block; font-size: 1.5rem;">24/7</strong>
+                    <span style="font-size: 0.9rem; opacity: 0.7;">Expert Support</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-form-side">
+        <div class="login-box">
+            <h3>Login</h3>
+            <span class="subtitle">Welcome back! Please enter your details.</span>
+
+            <div class="social-btns">
+                <button class="social-btn">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18" alt="Google"> Google
+                </button>
+                <button class="social-btn">
+                    <img src="https://www.svgrepo.com/show/475647/facebook-color.svg" width="18" alt="Facebook"> Facebook
+                </button>
+            </div>
+
+            <div class="divider">or use email</div>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label>User Name</label>
+                    <input type="text" placeholder="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" name="password" required>
+                </div>
+
+                <div class="login-options">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" style="accent-color: var(--primary-color);"> Remember me
+                    </label>
+                    <a href="#" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="submit-btn">Log-In</a></button>
+            </form>
+
+            <p style="text-align: center; margin-top: 30px; font-size: 0.95rem; color: #747d8c;">
+                Don't have an account? <a href="{% url 'signup' %}" style="color: var(--primary-color); text-decoration: none; font-weight: 700;">Sign up for free</a>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

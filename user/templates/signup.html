@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    /* --- Modern Sign Up Layout --- */
+    .signup-container {
+        display: flex;
+        min-height: calc(100vh - 70px);
+        background: var(--white);
+        overflow: hidden;
+    }
+
+    /* Left Side: Benefits Section */
+    .signup-brand-side {
+        flex: 1.2;
+        background: linear-gradient(rgba(255, 71, 87, 0.85), rgba(47, 53, 66, 0.9)), 
+                    url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&q=80&w=1000');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 60px;
+        color: white;
+    }
+
+    .benefits-list {
+        list-style: none;
+        margin-top: 30px;
+    }
+
+    .benefits-list li {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 12px;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Right Side: Form Section */
+    .signup-form-side {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        background: #fcfcfc;
+        overflow-y: auto;
+    }
+
+    .signup-box {
+        width: 100%;
+        max-width: 450px;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .input-group {
+        margin-bottom: 18px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: var(--text-dark);
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #edeff2;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: var(--transition);
+    }
+
+    .input-group input:focus {
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(255, 71, 87, 0.1);
+    }
+
+    .password-hint {
+        font-size: 0.75rem;
+        color: #747d8c;
+        margin-top: 5px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 15px;
+        background:#e84118;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+        margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+        background: #e84118;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(255, 71, 87, 0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .signup-brand-side { display: none; }
+    }
+</style>
+
+<div class="signup-container">
+    <div class="signup-brand-side">
+        <div class="brand-content">
+            <span style="text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.8rem; opacity: 0.9;">Exclusive Membership</span>
+            <h2 style="font-size: 2.8rem; margin: 15px 0;">Unlock Your <br>Style Perks.</h2>
+            <p>Create an account today and start earning rewards on every purchase.</p>
+            
+            <ul class="benefits-list">
+                <li>
+                    <span style="font-size: 1.5rem;">🚚</span>
+                    <span>Free Express Shipping on your first order</span>
+                </li>
+                <li>
+                    <span style="font-size: 1.5rem;">💎</span>
+                    <span>Earn 10 points for every $1 spent</span>
+                </li>
+                <li>
+                    <span style="font-size: 1.5rem;">🎁</span>
+                    <span>Early access to Seasonal Sales</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="signup-form-side">
+        <div class="signup-box">
+            <h3 style="font-size: 1.8rem; margin-bottom: 5px;">Create Account</h3>
+            <p style="color: #747d8c; margin-bottom: 25px;">Join ModernShop and start shopping.</p>
+            <form  method="POST">
+                <div class="form-row">
+                     {% csrf_token %}
+                    <div class="input-group">
+                        <label>First Name</label>
+                        <input type="text" placeholder="eg-John"name="username" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="eg-Doe" name="last_name" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="john@example.com"  name="email"  required>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" name="password"  required>
+                </div>
+                    <div class="input-group">
+                    <label>confimr_Password</label>
+                    <input type="password" placeholder="••••••••" name="confirm_password"  required>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: #57606f; cursor: pointer;">
+                        <input type="checkbox" style="margin-top: 3px; accent-color: var(--primary-color);" required>
+                        <span>I agree to the <a href="#" style="color: var(--primary-color); font-weight: 600; text-decoration: none;">Terms of Service</a> and allow ModernShop to send me style updates.</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+
+            <div style="display: flex; align-items: center; margin: 25px 0; color: #a4b0be; font-size: 0.8rem;">
+                <div style="flex: 1; height: 1px; background: #eee; margin-right: 10px;"></div>
+                OR
+                <div style="flex: 1; height: 1px; background: #eee; margin-left: 10px;"></div>
+            </div>
+
+      
+
+            <p style="text-align: center; margin-top: 30px; font-size: 0.95rem; color: #747d8c;">
+                Already a member? <a href="{% url 'login' %}" style="color: var(--primary-color); text-decoration: none; font-weight: 700;">Sign In</a>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
