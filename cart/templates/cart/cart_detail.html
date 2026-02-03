@@ -2,13 +2,34 @@
 
 {% block body %}
 <style>
-    .cart-container { padding: 40px 8%; }
+    .cart-container { padding: 40px 8%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     .cart-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
     .cart-table th { background: #2f3542; color: white; padding: 15px; text-align: left; }
-    .cart-table td { padding: 15px; border-bottom: 1px solid #eee; }
+    .cart-table td { padding: 15px; border-bottom: 1px solid #eee; vertical-align: middle; }
     .cart-img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; }
+    
+    /* Plus and Minus Controls */
+    .qty-controls { display: flex; align-items: center; gap: 12px; }
+    .qty-btn { 
+        display: inline-block; 
+        width: 30px; 
+        height: 30px; 
+        line-height: 28px; 
+        text-align: center; 
+        border: 1px solid #ddd; 
+        border-radius: 6px; 
+        text-decoration: none; 
+        color: #2f3542; 
+        background: #f8f9fa; 
+        font-weight: bold; 
+        font-size: 1.2rem;
+        transition: all 0.2s;
+    }
+    .qty-btn:hover { background: #2f3542; color: white; border-color: #2f3542; }
+    
     .total-section { margin-top: 20px; text-align: right; font-size: 1.5rem; font-weight: bold; }
-    .btn-checkout { background: #2ed573; color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px; display: inline-block; margin-top: 10px; }
+    .btn-checkout { background: #2ed573; color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px; display: inline-block; margin-top: 10px; transition: 0.3s; }
+    .btn-checkout:hover { background: #26af5a; transform: translateY(-2px); }
 </style>
 
 <div class="cart-container">
@@ -31,19 +52,32 @@
                         {% if item.product.image %}
                         <img src="{{ item.product.image.url }}" class="cart-img">
                         {% endif %}
-                        <strong>{{ item.product.name }}</strong>
+                        <span style="font-size: 1.1rem; color: #2f3542;"><strong>{{ item.product.name }}</strong></span>
                     </div>
                 </td>
-                <td>{{ item.quantity }}</td>
-                <td>${{ item.product.price }}</td>
-                <td>${{ item.total_price }}</td>
                 <td>
-                    <a href="{% url 'remove_from_cart' item.id %}" style="color: #ff4757;">Remove</a>
+                    <div class="qty-controls">
+                        <a href="{% url 'decrease_cart' item.id %}" class="qty-btn">−</a>
+                        
+                        <span style="font-weight: bold; font-size: 1.1rem; width: 20px; text-align: center;">
+                            {{ item.quantity }}
+                        </span>
+                        
+                        <a href="{% url 'increase_cart' item.id %}" class="qty-btn">+</a>
+                    </div>
+                </td>
+                <td>${{ item.product.price }}</td>
+                <td><strong>${{ item.total_price }}</strong></td>
+                <td>
+                    <a href="{% url 'remove_from_cart' item.id %}" style="color: #ff4757; text-decoration: none; font-weight: 600;">Remove</a>
                 </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="5" style="text-align: center; padding: 50px;">Your cart is empty.</td>
+                <td colspan="5" style="text-align: center; padding: 60px;">
+                    <p style="font-size: 1.2rem; color: #747d8c;">Your cart is currently empty.</p>
+                    <a href="/" style="color: #2ed573; text-decoration: underline;">Back to Shop</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
@@ -51,7 +85,7 @@
 
     {% if cart_items %}
     <div class="total-section">
-        Grand Total: ${{ total_price }}
+        <span style="color: #747d8c; font-weight: normal;">Grand Total:</span> ${{ total_price }}
         <br>
         <a href="#" class="btn-checkout">Proceed to Checkout</a>
     </div>

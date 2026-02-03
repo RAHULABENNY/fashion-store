@@ -6,7 +6,7 @@ from menu.models import Clothitems
 @login_required
 def view_cart(request):
     cart_items = CartItem.objects.filter(user=request.user)
-    # Calculate the grand total
+    # Calculate the grand total by summing individual item totals
     total_price = sum(item.total_price() for item in cart_items)
     return render(request, 'cart/cart_detail.html', {
         'cart_items': cart_items,
@@ -22,6 +22,24 @@ def add_to_cart(request, product_id):
         cart_item.quantity += 1
         cart_item.save()
         
+    return redirect('view_cart')
+
+@login_required
+def increase_cart_quantity(request, item_id):
+    cart_item = get_object_or_404(CartItem, id=item_id, user=request.user)
+    cart_item.quantity += 1
+    cart_item.save()
+    return redirect('view_cart')
+
+@login_required
+def decrease_cart_quantity(request, item_id):
+    cart_item = get_object_or_404(CartItem, id=item_id, user=request.user)
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        # If quantity is 1, pressing minus removes the item entirely
+        cart_item.delete()
     return redirect('view_cart')
 
 @login_required

@@ -1,14 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
-from menu.models import Clothitems 
+from menu.models import Clothitems
 
 class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Clothitems, on_delete=models.CASCADE) # Ensure this is aligned!
+    product = models.ForeignKey(Clothitems, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
-    date_added = models.DateTimeField(auto_now_add=True)
 
     def total_price(self):
+        # This method is used in the template and the view
         return self.quantity * self.product.price
 
     def __str__(self):
